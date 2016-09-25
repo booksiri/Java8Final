@@ -26,11 +26,17 @@ public class Calculator {
           student.setName(studentName);
           Set<String> keys = student.gpa.subjectGpa.keySet();
           
-          for (String subjName : keys) {
-                System.out.println("Enter PGA for subject " + subjName);
+          keys.stream().map((subjName) -> {
+              System.out.println("Enter PGA for subject " + subjName);
+                return subjName;
+            }).forEach((subjName) -> {
                 int gpa = new Scanner(System.in).nextInt();
+                while(gpa<0 || gpa>4){
+                    System.out.println("Enter PGA between1-4 ");
+                    gpa = new Scanner(System.in).nextInt();
+                }
                 student.gpa.subjectGpa.put(subjName, gpa);
-            }   
+            });   
           
           studentMap.put(student.name, student);
         }      
